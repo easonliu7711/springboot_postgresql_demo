@@ -1,5 +1,6 @@
 package com.example.demo.infra.gateway.persistence.model;
 
+import com.example.demo.domain.service.dto.DeviceInfoDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -32,4 +33,10 @@ public class DeviceInfoEntity {
     @Column(name = "update_time", nullable = false)
     private LocalDateTime updateTime;
 
+    public DeviceInfoEntity(DeviceInfoDto deviceInfoDto) {
+        this.deviceId = deviceInfoDto.getDeviceId();
+        this.deviceName = deviceInfoDto.getDeviceName();
+        this.deviceType = deviceInfoDto.getDeviceType();
+        this.deviceStatus = deviceInfoDto.getDeviceStatus();
+    }
 }
