@@ -1,0 +1,23 @@
+version: '3'
+services:
+  timescaledb:
+    image: timescale/timescaledb-ha:pg14-latest
+    container_name: timescale-demo
+    restart: on-failure
+    ports:
+      - 25432:5432/tcp
+    volumes:
+      - timescaledb-data-demo:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: tsdb
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - demo-net
+volumes:
+  timescaledb-data-demo:
+    external: true
+networks:
+  demo-net:
+    external: true
