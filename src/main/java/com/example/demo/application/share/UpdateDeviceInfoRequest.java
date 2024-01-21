@@ -7,7 +7,7 @@ import lombok.ToString;
 @Schema
 @Data
 @ToString
-public class DeviceInfoRequest {
+public class UpdateDeviceInfoRequest {
 
     @Schema(description = "裝置ID")
     private String deviceId;

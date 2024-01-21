@@ -1,6 +1,7 @@
 package com.example.demo.application.controller;
 
-import com.example.demo.application.share.DeviceInfoRequest;
+import com.example.demo.application.share.CreateDeviceInfoRequest;
+import com.example.demo.application.share.UpdateDeviceInfoRequest;
 import com.example.demo.domain.service.DeviceService;
 import com.example.demo.domain.service.dto.DeviceInfoDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,8 +26,8 @@ public class DeviceController {
 
     @Operation(summary = "新增裝置", description = "新增裝置")
     @PostMapping("/v1/devices")
-    public String createDevices(@RequestBody List<DeviceInfoRequest> deviceInfoRequestList) {
-        List<DeviceInfoDto> deviceInfoDtoList = deviceInfoRequestList.stream().map(DeviceInfoDto::new).collect(java.util.stream.Collectors.toList());
+    public String createDevices(@RequestBody List<CreateDeviceInfoRequest> createDeviceInfoRequestList) {
+        List<DeviceInfoDto> deviceInfoDtoList = createDeviceInfoRequestList.stream().map(DeviceInfoDto::new).collect(java.util.stream.Collectors.toList());
         deviceService.createDevices(deviceInfoDtoList);
         return "Success";
     }
@@ -40,8 +41,8 @@ public class DeviceController {
 
     @Operation(summary = "更新裝置", description = "更新裝置")
     @PutMapping("/v1/devices")
-    public String updateDevice(@RequestBody List<DeviceInfoRequest> deviceInfoRequestList) {
-        List<DeviceInfoDto> deviceInfoDtoList = deviceInfoRequestList.stream().map(DeviceInfoDto::new).toList();
+    public String updateDevice(@RequestBody List<UpdateDeviceInfoRequest> updateDeviceInfoRequestList) {
+        List<DeviceInfoDto> deviceInfoDtoList = updateDeviceInfoRequestList.stream().map(DeviceInfoDto::new).toList();
         deviceService.updateDevice(deviceInfoDtoList);
         return "Success";
     }

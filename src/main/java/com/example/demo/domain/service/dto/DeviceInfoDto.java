@@ -1,12 +1,14 @@
 package com.example.demo.domain.service.dto;
 
-import com.example.demo.application.share.DeviceInfoRequest;
+import com.example.demo.application.share.CreateDeviceInfoRequest;
+import com.example.demo.application.share.UpdateDeviceInfoRequest;
 import com.example.demo.infra.gateway.persistence.model.DeviceInfoEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Schema
 @Data
@@ -35,10 +37,17 @@ public class DeviceInfoDto {
         this.updateTime = deviceInfoEntity.getUpdateTime();
     }
 
-    public DeviceInfoDto(DeviceInfoRequest deviceInfoRequest) {
-        this.deviceId = deviceInfoRequest.getDeviceId();
-        this.deviceName = deviceInfoRequest.getDeviceName();
-        this.deviceType = deviceInfoRequest.getDeviceType();
-        this.deviceStatus = deviceInfoRequest.getDeviceStatus();
+    public DeviceInfoDto(CreateDeviceInfoRequest createDeviceInfoRequest) {
+        this.deviceId = UUID.randomUUID().toString();
+        this.deviceName = createDeviceInfoRequest.getDeviceName();
+        this.deviceType = createDeviceInfoRequest.getDeviceType();
+        this.deviceStatus = createDeviceInfoRequest.getDeviceStatus();
+    }
+
+    public DeviceInfoDto(UpdateDeviceInfoRequest updateDeviceInfoRequest) {
+        this.deviceId = updateDeviceInfoRequest.getDeviceId();
+        this.deviceName = updateDeviceInfoRequest.getDeviceName();
+        this.deviceType = updateDeviceInfoRequest.getDeviceType();
+        this.deviceStatus = updateDeviceInfoRequest.getDeviceStatus();
     }
 }
