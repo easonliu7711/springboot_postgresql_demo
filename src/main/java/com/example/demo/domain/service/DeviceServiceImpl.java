@@ -4,6 +4,7 @@ import com.example.demo.domain.service.dto.DeviceInfoDto;
 import com.example.demo.infra.gateway.persistence.model.DeviceInfoEntity;
 import com.example.demo.infra.gateway.persistence.repository.DeviceInfoRepository;
 import jakarta.annotation.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -30,10 +31,10 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public List<DeviceInfoDto> getDevices(int page, int pageSize) {
-
+    public Page<DeviceInfoDto> getDevices(int page, int pageSize) {
         // 查詢deviceInfoRepository 並轉換成 DeviceInfoDto
-        return deviceInfoRepository.findAll(PageRequest.of(page,pageSize, Sort.by("createTime").descending())).stream().map(DeviceInfoDto::new).toList();
+        Page<DeviceInfoEntity> deviceInfoEntityPage = deviceInfoRepository.findAll(PageRequest.of(page, pageSize, Sort.by("createTime").descending()));
+        return deviceInfoEntityPage.map(DeviceInfoDto::new);
     }
 
     @Override

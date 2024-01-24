@@ -7,6 +7,7 @@ import com.example.demo.domain.service.dto.DeviceInfoDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class DeviceController {
 
     @Operation(summary = "取得裝置列表", description = "取得裝置列表")
     @GetMapping("/v1/devices")
-    public List<DeviceInfoDto> getDevices(@Schema(description = "要取得的頁面數(從0開始)") @RequestParam int page, @Schema(description = "每頁的筆數") @RequestParam int pageSize) {
+    public Page<DeviceInfoDto> getDevices(@Schema(description = "要取得的頁面數(從0開始)") @RequestParam int page, @Schema(description = "每頁的筆數") @RequestParam int pageSize) {
         return deviceService.getDevices(page, pageSize);
     }
 
