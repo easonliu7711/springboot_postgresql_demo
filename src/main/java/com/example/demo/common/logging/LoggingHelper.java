@@ -1,9 +1,13 @@
 package com.example.demo.common.logging;
 
+import com.example.demo.common.error.ErrorResponse;
 import com.google.common.base.Joiner;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.MDC;
+import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.context.request.WebRequest;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -39,6 +43,15 @@ public class LoggingHelper {
         MDC.put("logType", "Exception");
         log.error(builder);
         MDC.put("logType", "Error");
+    }
+
+    public static void toRequestInvalidLog(WebRequest request, ErrorResponse errorResponse) {
+        LocalDateTime now = LocalDateTime.now();
+        String requestURI = ((ServletWebRequest) request).getRequest().getRequestURI();
+        String builder = System.lineSeparator() + "    - URI    :" + requestURI + "]" + System.lineSeparator() + "   - Started : [" + now + "]" + System.lineSeparator() + "   - output  : [" + errorResponse + "] " + System.lineSeparator() + "   - All done.";
+        MDC.put("logType", "Invalid Request");
+        log.info(builder);
+        MDC.put("logType", "");
     }
 
     public static void toServiceLog(String className, String methodName, LocalDateTime start, Object[] args, Object result, LocalDateTime end) {
