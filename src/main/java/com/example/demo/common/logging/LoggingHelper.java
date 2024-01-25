@@ -23,26 +23,39 @@ public class LoggingHelper {
 
     public static void toControllerProcessedLog(String className, String methodName, LocalDateTime start, Object[] args, Object result, LocalDateTime end) {
         String joinedArgs = getJoinedArgs(args);
-        String builder = System.lineSeparator() + "   - class    : [" + className + "]" + System.lineSeparator() + "   - method   : [" + methodName + "]" + System.lineSeparator() + "   - Input    : [" + joinedArgs + "] " + System.lineSeparator() + "   - Output   : [" + result + "] " + System.lineSeparator() + "   - Started  : [" + start + "] " + System.lineSeparator() + "   - Ended    : [" + end + "] " + System.lineSeparator() + "   - Elapsed  : [" + Duration.between(start, end).toMillis() + "]" + System.lineSeparator() + "   - All done.";
-        MDC.put("logType", "Controller");
+        String builder = System.lineSeparator()
+                + "   - logType  : [Controller]" + System.lineSeparator()
+                + "   - class    : [" + className + "]" + System.lineSeparator()
+                + "   - method   : [" + methodName + "]" + System.lineSeparator()
+                + "   - Input    : [" + joinedArgs + "] " + System.lineSeparator()
+                + "   - Output   : [" + result + "] " + System.lineSeparator()
+                + "   - Started  : [" + start + "] " + System.lineSeparator()
+                + "   - Ended    : [" + end + "] " + System.lineSeparator()
+                + "   - Elapsed  : [" + Duration.between(start, end).toMillis() + "]" + System.lineSeparator()
+                + "   - All done.";
         log.info(builder);
-        MDC.put("logType", "");
     }
 
     public static void toControllerRequestLog(String requestURI, Object[] args) {
         String joinedArgs = getJoinedArgs(args);
-        String builder = System.lineSeparator() + "   - URI  : [" + requestURI + "]" + System.lineSeparator() + "   - Input : [" + joinedArgs + "] " + System.lineSeparator() + "   - All done.";
-        MDC.put("logType", "Request");
+        String builder = System.lineSeparator()
+                + "   - logType : [Request]" + System.lineSeparator()
+                + "   - URI     : [" + requestURI + "]" + System.lineSeparator()
+                + "   - Input   : [" + joinedArgs + "] " + System.lineSeparator()
+                + "   - All done.";
         log.info(builder);
-        MDC.put("logType", "");
     }
 
     public static void toExceptionLogger(String className, String methodName, Object[] args, Throwable t) {
         String joinedArgs = getJoinedArgs(args);
-        String builder = System.lineSeparator() + "   - class    : [" + className + "]" + System.lineSeparator() + "   - method   : [" + methodName + "]" + System.lineSeparator() + "   - Input    : [" + joinedArgs + "] " + System.lineSeparator() + "   - Message  : [" + ExceptionUtils.getStackTrace(t) + "]" + System.lineSeparator() + "   - All done.";
-        MDC.put("logType", "Exception");
+        String builder = System.lineSeparator()
+                + "   - logType  : [Exception]" + System.lineSeparator()
+                + "   - class    : [" + className + "]" + System.lineSeparator()
+                + "   - method   : [" + methodName + "]" + System.lineSeparator()
+                + "   - Input    : [" + joinedArgs + "] " + System.lineSeparator()
+                + "   - Message  : [" + ExceptionUtils.getStackTrace(t) + "]" + System.lineSeparator()
+                + "   - All done.";
         log.error(builder);
-        MDC.put("logType", "Error");
     }
 
     public static void toRequestInvalidLog(WebRequest request, ErrorResponse errorResponse) {
@@ -56,10 +69,17 @@ public class LoggingHelper {
 
     public static void toServiceLog(String className, String methodName, LocalDateTime start, Object[] args, Object result, LocalDateTime end) {
         String joinedArgs = getJoinedArgs(args);
-        String builder = System.lineSeparator() + "   - class    : [" + className + "]" + System.lineSeparator() + "   - method   : [" + methodName + "]" + System.lineSeparator() + "   - Input    : [" + joinedArgs + "] " + System.lineSeparator() + "   - Output   : [" + result + "] " + System.lineSeparator() + "   - Started  : [" + start + "] " + System.lineSeparator() + "   - Ended    : [" + end + "] " + System.lineSeparator() + "   - Elapsed  : [" + Duration.between(start, end).toMillis() + "]" + System.lineSeparator() + "   - All done.";
-        MDC.put("logType", "Service");
+        String builder = System.lineSeparator()
+                + "   - logType  : [Service]" + System.lineSeparator()
+                + "   - class    : [" + className + "]" + System.lineSeparator()
+                + "   - method   : [" + methodName + "]" + System.lineSeparator()
+                + "   - Input    : [" + joinedArgs + "] " + System.lineSeparator()
+                + "   - Output   : [" + result + "] " + System.lineSeparator()
+                + "   - Started  : [" + start + "] " + System.lineSeparator()
+                + "   - Ended    : [" + end + "] " + System.lineSeparator()
+                + "   - Elapsed  : [" + Duration.between(start, end).toMillis() + "]" + System.lineSeparator()
+                + "   - All done.";
         log.info(builder);
-        MDC.put("logType", "");
     }
 
 }
