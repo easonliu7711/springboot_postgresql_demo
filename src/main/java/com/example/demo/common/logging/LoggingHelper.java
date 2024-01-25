@@ -61,10 +61,13 @@ public class LoggingHelper {
     public static void toRequestInvalidLog(WebRequest request, ErrorResponse errorResponse) {
         LocalDateTime now = LocalDateTime.now();
         String requestURI = ((ServletWebRequest) request).getRequest().getRequestURI();
-        String builder = System.lineSeparator() + "    - URI    :" + requestURI + "]" + System.lineSeparator() + "   - Started : [" + now + "]" + System.lineSeparator() + "   - output  : [" + errorResponse + "] " + System.lineSeparator() + "   - All done.";
-        MDC.put("logType", "Invalid Request");
+        String builder = System.lineSeparator()
+                + "   - logType : [Invalid Request]" + System.lineSeparator()
+                + "    - URI    :" + requestURI + "]" + System.lineSeparator()
+                + "   - Started : [" + now + "]" + System.lineSeparator()
+                + "   - output  : [" + errorResponse + "] " + System.lineSeparator()
+                + "   - All done.";
         log.info(builder);
-        MDC.put("logType", "");
     }
 
     public static void toServiceLog(String className, String methodName, LocalDateTime start, Object[] args, Object result, LocalDateTime end) {
