@@ -63,7 +63,7 @@ public class LoggingHelper {
         String requestURI = ((ServletWebRequest) request).getRequest().getRequestURI();
         String builder = System.lineSeparator()
                 + "   - logType : [Invalid Request]" + System.lineSeparator()
-                + "    - URI    :" + requestURI + "]" + System.lineSeparator()
+                + "    - URI    : [" + requestURI + "]" + System.lineSeparator()
                 + "   - Started : [" + now + "]" + System.lineSeparator()
                 + "   - output  : [" + errorResponse + "] " + System.lineSeparator()
                 + "   - All done.";
