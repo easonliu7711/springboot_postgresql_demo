@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("${server.api-base-path}")
-public class DeviceController {
+public class DeviceController extends BaseController{
 
     @Resource
     private DeviceService deviceService;
@@ -28,14 +28,14 @@ public class DeviceController {
     }
 
     @Operation(summary = "刪除裝置", description = "刪除裝置")
-    @DeleteMapping("/v1/auth/device/{deviceId}")
-    public String deleteDevice(@PathVariable String deviceId) {
+    @DeleteMapping("/v1/auth/devices")
+    public String deleteDevice(@RequestParam String deviceId) {
         deviceService.deleteDevice(deviceId);
         return "Success";
     }
 
     @Operation(summary = "取得裝置列表", description = "取得裝置列表")
-    @GetMapping("/v1/auth/devices")
+    @GetMapping("/v1/auth/devices/list")
     public Page<DeviceInfoDto> getDevices(@Schema(description = "要取得的頁面數(從0開始)") @RequestParam int page, @Schema(description = "每頁的筆數") @RequestParam int pageSize) {
         return deviceService.getDevices(page, pageSize);
     }

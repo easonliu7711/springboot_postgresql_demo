@@ -24,12 +24,8 @@ import java.nio.charset.StandardCharsets;
 @RestController
 @RequestMapping("${server.api-base-path}")
 @Validated
-public class AuthController {
+public class AuthController extends BaseController{
 
-    @Resource
-    private HttpServletRequest httpServletRequest;
-    @Resource
-    private HttpServletResponse httpServletResponse;
     @Resource
     private KeycloakService keycloakService;
 
@@ -40,7 +36,7 @@ public class AuthController {
                 .sameSite("Strict")
                 .path("/")
                 .build();
-        httpServletResponse.addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
+        getHttpServletResponse().addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
     }
 
     @Operation(summary = "獲取 AuthToken", description = "獲取 AuthToken")
@@ -52,7 +48,7 @@ public class AuthController {
     }
 
     protected String getCookieValue() {
-        Cookie[] cookies = httpServletRequest.getCookies();
+        Cookie[] cookies = getHttpServletRequest().getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("refresh_token".equals(cookie.getName())) {

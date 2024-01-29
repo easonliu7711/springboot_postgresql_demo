@@ -2,8 +2,6 @@ package com.example.demo.common.error;
 
 import lombok.Getter;
 
-import java.util.Arrays;
-
 /**
  * Enumeration of API Error codes.
  */
@@ -19,6 +17,8 @@ public enum ErrorCode {
     ACCOUNT_LOCKED("10002", "Account Locked", "帳戶被鎖定"),
     ROLE_PERMISSION_DENIED("10003", "Role Permission Denied", "角色權限被拒絕"),
     REFRESH_TOKEN_INVALID("10004", "Refresh Token Invalid", "Refresh Token 失效"),
+    ACCESS_TOKEN_GET_INFO_FAILED("10005", "Failed to get access token information", "獲取 Access Token 信息失敗"),
+
 
     //---------------------------------------
     // [2xxxx] User Management
@@ -30,6 +30,10 @@ public enum ErrorCode {
     INVALID_SECRET_HISTORY("20004", "Invalid Secret History", "密碼不能與前5次密碼相同"),
     USER_MANAGEMENT_RESPONSE_ERROR("29999", "User Management Response Error", "使用者管理錯誤"),
 
+    //---------------------------------------
+    // [3xxxx] Document Management
+    //---------------------------------------
+    DOCUMENT_PERMISSION_DENIED("30001", "Document Permission Denied", "文件權限被拒絕"),
     //---------------------------------------
     // [9xxxx] Runtime
     //---------------------------------------
