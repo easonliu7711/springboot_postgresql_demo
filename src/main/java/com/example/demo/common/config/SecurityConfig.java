@@ -32,7 +32,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRegistry -> authRegistry
                         .requestMatchers(
                                 apiBasePath + "/v1/auth/devices/**",
-                                apiBasePath + "/v1/auth/document/**").hasRole("SYS_ADMIN_ROLE")
+                                apiBasePath + "/v1/auth/document/**",
+                                apiBasePath + "/v1/auth/admin/**").hasRole("SYS_ADMIN_ROLE")
                         .anyRequest().authenticated());
         http
                 .exceptionHandling(handlingConfigurer -> handlingConfigurer

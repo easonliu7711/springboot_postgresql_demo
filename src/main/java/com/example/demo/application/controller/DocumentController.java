@@ -1,9 +1,11 @@
 package com.example.demo.application.controller;
 
 import com.example.demo.application.controller.request.CreateDocumentInfoRequest;
+import com.example.demo.application.controller.request.DocumentPermissionRequest;
 import com.example.demo.application.controller.request.UpdateDocumentInfoRequest;
 import com.example.demo.domain.service.DocumentService;
 import com.example.demo.domain.service.dto.DocumentInfoDto;
+import com.example.demo.domain.service.dto.DocumentPermissionDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
@@ -40,6 +42,13 @@ public class DocumentController extends BaseController {
     @GetMapping("/v1/auth/document/list")
     public Page<DocumentInfoDto> getDocuments(@RequestParam int page, @RequestParam int pageSize) {
         return documentService.getDocuments(getActionUserId(), page, pageSize);
+    }
+
+    @Operation(summary = "設定文件permission", description = "設定文件permission")
+    @PostMapping("/v1/auth/admin/document/permission")
+    public String setDocumentPermission(@RequestBody DocumentPermissionRequest documentPermissionRequest) {
+        documentService.setDocumentPermission(new DocumentPermissionDto(documentPermissionRequest));
+        return "Success";
     }
 
     @Operation(summary = "修改文件", description = "修改文件")

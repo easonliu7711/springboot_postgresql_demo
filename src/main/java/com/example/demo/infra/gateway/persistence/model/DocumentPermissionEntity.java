@@ -1,5 +1,6 @@
 package com.example.demo.infra.gateway.persistence.model;
 
+import com.example.demo.domain.service.dto.DocumentPermissionDto;
 import com.example.demo.infra.gateway.persistence.model.pk.DocumentPermissionEntityPK;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -36,7 +37,12 @@ public class DocumentPermissionEntity {
         this.canEdit = canEdit;
     }
 
-    public DocumentPermissionEntity() {
+    public DocumentPermissionEntity(DocumentPermissionDto documentPermissionDto) {
+        this.documentPermissionEntityPK = new DocumentPermissionEntityPK(documentPermissionDto.getDocumentId(), documentPermissionDto.getUserId());
+        this.canView = documentPermissionDto.isCanView();
+        this.canEdit = documentPermissionDto.isCanEdit();
+    }
 
+    public DocumentPermissionEntity() {
     }
 }

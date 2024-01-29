@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface DocumentInfoRepository extends JpaRepository<DocumentInfoEntity, String> {
 
-    @Query(value = "SELECT * FROM document_info l left join document_permission r on l.document_id = r.document_id WHERE r.user_id = ?1 AND r.can_view = true ", nativeQuery = true)
+    @Query(value = "SELECT l.* FROM demo.document_info l left join demo.document_permission r on l.document_id = r.document_id WHERE r.user_id = ?1 AND r.can_view = true ", nativeQuery = true)
     Page<DocumentInfoEntity> findAllByUserId(String actionUserId, PageRequest pageRequest);
 
 }

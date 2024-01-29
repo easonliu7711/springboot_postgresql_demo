@@ -3,6 +3,7 @@ package com.example.demo.domain.service;
 import com.example.demo.common.error.ErrorCode;
 import com.example.demo.common.exception.ActionRuntimeException;
 import com.example.demo.domain.service.dto.DocumentInfoDto;
+import com.example.demo.domain.service.dto.DocumentPermissionDto;
 import com.example.demo.infra.gateway.persistence.model.DocumentInfoEntity;
 import com.example.demo.infra.gateway.persistence.model.DocumentPermissionEntity;
 import com.example.demo.infra.gateway.persistence.repository.DocumentInfoRepository;
@@ -46,6 +47,11 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public Page<DocumentInfoDto> getDocuments(String actionUserId, int page, int pageSize) {
         return documentInfoRepository.findAllByUserId(actionUserId, PageRequest.of(page, pageSize)).map(DocumentInfoDto::new);
+    }
+
+    @Override
+    public void setDocumentPermission(DocumentPermissionDto documentPermissionDto) {
+        documentPermissionRepository.save(new DocumentPermissionEntity(documentPermissionDto));
     }
 
     @Override
